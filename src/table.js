@@ -1,8 +1,8 @@
-const IncomeTable = (props) => {
+const Table = (props) => {
   return (
     <>
-      <h1>incomes</h1>
-      {props.incomes.map((elem, index) => {
+      <h1>{props.type}</h1>
+      {props.list.map((elem, index) => {
         return (
           <div key={index}>
             <span>
@@ -11,9 +11,9 @@ const IncomeTable = (props) => {
           </div>
         );
       })}
-      <h5>total : {props.getTotal(props.incomes)}</h5>
+      <h5>total : {props.getTotal(props.list)}</h5>
     </>
   );
 };
 
-export default IncomeTable;
+export default Table;
