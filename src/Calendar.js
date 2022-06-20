@@ -3,11 +3,15 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 
 const Calendar = (props) => {
   return (
-    <FullCalendar
-      plugins={[dayGridPlugin]}
-      initialView="dayGridMonth"
-      events={props.events}
-    />
+    <div
+      style={{ backgroundColor: "darkgrey", padding: "10%", margin: "20px" }}
+    >
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        events={props.events}
+      />
+    </div>
   );
 };
 

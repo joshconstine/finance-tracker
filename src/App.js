@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import AddInformation from "./AddInformation";
-import Table from "./table";
+import Table from "./Table.js";
 import Calendar from "./Calendar";
 
 function App() {
@@ -33,22 +33,22 @@ function App() {
       {
         name: "work",
         ammount: 1200,
+        day: "14",
       },
       {
         name: "plasma",
         ammount: 520,
+        day: "07",
       },
       {
         name: "gi bill",
         ammount: 2850,
+        day: "01",
       },
       {
         name: "VA",
         ammount: 3650,
-      },
-      {
-        name: "rent",
-        ammount: 1350,
+        day: "01",
       },
     ];
     setIncomes(baseIncomes);
@@ -78,15 +78,24 @@ function App() {
         color: "red",
       });
     });
+    incomes.forEach((curr) => {
+      events.push({
+        title: curr.name,
+        date: `${date}${curr.day}`,
+        color: "green",
+      });
+    });
     return events;
   };
 
   return (
     <div className="App">
       <header>Finance Tracker</header>
-
-      <Table type="incomes" list={incomes} getTotal={getTotal} />
-      <Table type="expenses" list={expenses} getTotal={getTotal} />
+      <h1>Recurring transactions</h1>
+      <div className="fincanceContainer">
+        <Table type="Income" list={incomes} getTotal={getTotal} />
+        <Table type="Expense" list={expenses} getTotal={getTotal} />
+      </div>
       <AddInformation addValue={addValue} />
       <Calendar events={getEvents()} />
     </div>

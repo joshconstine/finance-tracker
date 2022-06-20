@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #414142;
+  color: white;
 }
 
 .App-logo {
@@ -35,4 +37,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+.fincanceContainer {
+  display: flex;
+  justify-content: center;
 }
