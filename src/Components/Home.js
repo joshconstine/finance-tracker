@@ -3,23 +3,19 @@ import { useEffect, useState } from "react";
 import AddInformation from "./AddInformation";
 import Table from "./Table.js";
 import Calendar from "./Calendar";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addIncome,
+  selectRecurringIncomes,
+} from "../redux/recurringIncomesSlice";
+import { selectRecurringExpenses } from "../redux/recurringExpensesSlice";
 function Home() {
-  const [incomes, setIncomes] = useState([]);
-  const [expenses, setExpenses] = useState([]);
+  // const [incomes, setIncomes] = useState([]);
+  const expenses = useSelector(selectRecurringExpenses);
+  const incomes = useSelector(selectRecurringIncomes);
+  // console.log(incomes);
 
-  useEffect(() => {
-    fillIncomes();
-    fillExpenses();
-  }, []);
-
-  const addValue = (obj, type) => {
-    if (type === "income") {
-      setIncomes([...incomes, obj]);
-    }
-    if (type === "expense") {
-      setExpenses([...expenses, obj]);
-    }
-  };
+  useEffect(() => {}, []);
 
   const getTotal = (ary) => {
     return ary.reduce(function (previousValue, currentValue) {
@@ -27,46 +23,6 @@ function Home() {
     }, 0);
   };
 
-  const fillIncomes = () => {
-    const baseIncomes = [
-      {
-        name: "work",
-        ammount: 1200,
-        day: "14",
-      },
-      {
-        name: "plasma",
-        ammount: 520,
-        day: "07",
-      },
-      {
-        name: "gi bill",
-        ammount: 2850,
-        day: "01",
-      },
-      {
-        name: "VA",
-        ammount: 3650,
-        day: "01",
-      },
-    ];
-    setIncomes(baseIncomes);
-  };
-  const fillExpenses = () => {
-    const baseExpenses = [
-      {
-        name: "rent",
-        ammount: 2995,
-        day: "01",
-      },
-      {
-        name: "gas",
-        ammount: 500,
-        day: "05",
-      },
-    ];
-    setExpenses(baseExpenses);
-  };
   const getEvents = () => {
     const date = new Date().toISOString().slice(0, 8);
     let events = [];
@@ -77,6 +33,7 @@ function Home() {
         color: "red",
       });
     });
+
     incomes.forEach((curr) => {
       events.push({
         title: curr.name,
@@ -95,7 +52,7 @@ function Home() {
         <Table type="Income" list={incomes} getTotal={getTotal} />
         <Table type="Expense" list={expenses} getTotal={getTotal} />
       </div>
-      <AddInformation addValue={addValue} />
+      <AddInformation />
       <Calendar events={getEvents()} />
     </div>
   );
