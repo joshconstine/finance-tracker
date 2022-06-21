@@ -7,14 +7,18 @@ import {
 } from "react-router-dom";
 import SignUp from "./Auth/SignUp";
 import Login from "./Auth/Login";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from "./redux/userSlice";
 
 const Routes = () => {
-  const currentUser = false;
+  const user = useSelector(selectUser);
+  console.log("user", user);
+  const dispatch = useDispatch();
 
   return (
     <div>
       <Router>
-        {currentUser ? (
+        {user ? (
           <Switch>
             <Route path="/" component={Home} />
             <Redirect to="/" />
@@ -23,7 +27,7 @@ const Routes = () => {
           <Switch>
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
-            <Route path="/" component={SignUp} />
+            <Route path="/" component={Login} />
           </Switch>
         )}
       </Router>
