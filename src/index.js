@@ -5,8 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import LogRocket from "logrocket";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+LogRocket.init("kow0t4/financetracker");
 root.render(
   <React.StrictMode>
     <Provider store={store}>

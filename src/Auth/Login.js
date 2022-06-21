@@ -13,7 +13,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [profilePic, setProfilePic] = useState("");
   const dispatch = useDispatch();
 
   const loginToApp = (e) => {
@@ -52,7 +51,6 @@ function Login() {
         // Update the newly created user with a display name and a picture
         updateProfile(userAuth.user, {
           displayName: name,
-          photoURL: profilePic,
         })
           .then(
             // Dispatch the user information for persistence in the redux state
@@ -61,7 +59,6 @@ function Login() {
                 email: userAuth.user.email,
                 uid: userAuth.user.uid,
                 displayName: name,
-                photoUrl: profilePic,
               })
             )
           )
@@ -75,46 +72,45 @@ function Login() {
   };
 
   return (
-    <div>
-      <div className="login">
-        <form>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Full name (required for registering)"
-            type="text"
-          />
-
-          <input
-            value={profilePic}
-            onChange={(e) => setProfilePic(e.target.value)}
-            placeholder="Profile picture URL (optional)"
-            type="text"
-          />
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            type="email"
-          />
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            type="password"
-          />
+    <div className="loginForm">
+      <form>
+        <div className="login">
+          <div>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Full name (required for registering)"
+              type="text"
+            />
+          </div>
+          <div>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              type="email"
+            />
+          </div>
+          <div>
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              type="password"
+            />
+          </div>
           <button type="submit" onClick={loginToApp}>
             Sign In
           </button>
-        </form>
+        </div>
+      </form>
 
-        <p>
-          Not a member?{" "}
-          <span className="login__register" onClick={register}>
-            Register Now
-          </span>
-        </p>
-      </div>
+      <p>
+        Not a member?{" "}
+        <span className="login__register" onClick={register}>
+          Register Now
+        </span>
+      </p>
     </div>
   );
 }

@@ -1,6 +1,11 @@
 import { useRef } from "react";
 import "./AddInformation.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addIncome } from "../redux/recurringIncomesSlice";
+import { addExpense } from "../redux/recurringExpensesSlice";
 const AddInformation = (props) => {
+  const dispatch = useDispatch();
+
   const nameRef = useRef("");
   const ammountRef = useRef(0);
   const dayRef = useRef("");
@@ -24,7 +29,20 @@ const AddInformation = (props) => {
     nameRef.current.value = "";
     ammountRef.current.value = "";
     dayRef.current.value = "";
-    props.addValue(result, inputType);
+    if (inputType === "income") {
+      try {
+        dispatch(addIncome(result));
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    if (inputType === "expense") {
+      try {
+        dispatch(addExpense(result));
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   return (
